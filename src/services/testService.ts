@@ -7,5 +7,7 @@ interface Filter {
 export const find = async (filter: Filter) => {
   if(filter.groupBy === 'disciplines') {
     return repository.viewTestsByDiscipline();
+  } else if(filter.groupBy === 'teachers') {
+      return repository.viewTestsByTeacher();
   }
 }

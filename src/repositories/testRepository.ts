@@ -22,3 +22,18 @@ export const viewTestsByDiscipline = async () => {
       },
     });
   }
+
+  export const viewTestsByTeacher = async () => {
+    return prisma.teacherDiscipline.findMany({
+      select: {
+        id: true,
+        teacher: true,
+        discipline: true,
+        Tests: {
+          include: {
+            category: true,
+          }
+        },
+      },
+    });
+  }
