@@ -10,7 +10,6 @@ import { conflictError, unauthorizedError, notFoundError } from "../utils/errorU
 export type CreateUserData = Omit<User, "id">;
 
 export const createUser = async (user: CreateUserData) => {
-  console.log(user);
   const existingUser = await repository.findUserByEmail(user.email);
 
   if (existingUser) throw conflictError("Email must be unique");
@@ -23,7 +22,8 @@ export const createUser = async (user: CreateUserData) => {
 
 export const login = async (login: CreateUserData) => {
   const user = await getUserOrFail(login);
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRATION_TIME });
+  //fix-me: , { expiresIn: process.env.JWT_EXPIRATION_TIME } is not working!
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
   return token;
 }

@@ -17,6 +17,8 @@ export const insertUser = async (user: CreateUserData) => {
 
 export const findById = async (id: number) => {
   return prisma.user.findUnique({
-    where: { id }
+    where: { 
+      id,
+    },
   });
 }
